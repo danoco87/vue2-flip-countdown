@@ -83,9 +83,7 @@ export default {
     interval = setInterval(() => {
       this.now = Math.trunc(new Date().getTime() / 1000)
     }, 1000)
-    if (this.diff !== 0) {
       this.show = true
-    }
   },
   computed: {
     seconds () {
