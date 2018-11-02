@@ -103,6 +103,7 @@ export default {
     }, 1000)
   },
   mounted () {
+    this.diff = this.date - this.now
     timeData[0].current = this.days
     timeData[0].previous = this.days + 1
     timeData[1].current = this.hours
