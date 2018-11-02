@@ -2,7 +2,7 @@
     <div class="container flip-clock">
         <template v-for="data in timeData" v-show="show">
             <span v-bind:key="data.label" class="flip-clock__piece" :id="data.elementId">
-                <span class="flip-clock__card flip-card">
+                <span class="flip-clock__card flip-card" v-if="timeData[0].current !== -1">
                 <b class="flip-card__top">{{data.current | twoDigits}}</b>
                 <b class="flip-card__bottom" v-bind:data-value="data.current | twoDigits"></b>
                 <b class="flip-card__back" v-bind:data-value="data.previous | twoDigits"></b>
@@ -35,26 +35,26 @@ export default {
       show: false,
       timeData: [
         {
-          current: 2,
-          previous: 2,
+          current: -1,
+          previous: -1,
           label: 'Days',
           elementId: 'flip-card-days'
         },
         {
-          current: 2,
-          previous: 2,
+          current: -1,
+          previous: -1,
           label: 'Hours',
           elementId: 'flip-card-hours'
         },
         {
-          current: 2,
-          previous: 2,
+          current: -1,
+          previous: -1,
           label: 'Minutes',
           elementId: 'flip-card-minutes'
         },
         {
-          current: 2,
-          previous: 2,
+          current: -1,
+          previous: -1,
           label: 'Seconds',
           elementId: 'flip-card-seconds'
         }
