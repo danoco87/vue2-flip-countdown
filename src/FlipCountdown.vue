@@ -75,8 +75,9 @@ export default {
     }, 1000)
   },
   mounted () {
-      this.now = Math.trunc(new Date().getTime() / 1000)
+    if (this.diff !== 0) {
       this.show = true
+    }
   },
   computed: {
     seconds () {
