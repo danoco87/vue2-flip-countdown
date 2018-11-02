@@ -75,14 +75,7 @@ export default {
     }, 1000)
   },
   mounted () {
-    const endTime = this.deadline
-    this.date = Math.trunc(Date.parse(endTime.replace(/-/g, '/')) / 1000)
-    if (!this.date) {
-      throw new Error("Invalid props value, correct the 'deadline'")
-    }
-    interval = setInterval(() => {
       this.now = Math.trunc(new Date().getTime() / 1000)
-    }, 1000)
       this.show = true
   },
   computed: {
