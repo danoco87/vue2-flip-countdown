@@ -1,8 +1,8 @@
 <template>
     <div class="container flip-clock">
         <template v-for="data in timeData" v-show="show">
-            <span v-bind:key="data.label" class="flip-clock__piece" :id="data.elementId">
-                <span class="flip-clock__card flip-card" v-if="timeData[0].current !== -1">
+            <span v-bind:key="data.label" class="flip-clock__piece" :id="data.elementId" v-if="timeData[0].previous !== -1">
+                <span class="flip-clock__card flip-card">
                 <b class="flip-card__top">{{data.current | twoDigits}}</b>
                 <b class="flip-card__bottom" v-bind:data-value="data.current | twoDigits"></b>
                 <b class="flip-card__back" v-bind:data-value="data.previous | twoDigits"></b>
@@ -75,6 +75,14 @@ export default {
     }, 1000)
   },
   mounted () {
+    const endTime = this.deadline
+    this.date = Math.trunc(Date.parse(endTime.replace(/-/g, '/')) / 1000)
+    if (!this.date) {
+      throw new Error("Invalid props value, correct the 'deadline'")
+    }
+    interval = setInterval(() => {
+      this.now = Math.trunc(new Date().getTime() / 1000)
+    }, 1000)
     if (this.diff !== 0) {
       this.show = true
     }
