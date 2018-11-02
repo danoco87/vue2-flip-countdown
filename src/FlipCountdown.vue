@@ -63,25 +63,25 @@ export default {
       show: false,
       timeData: [
         {
-          current: 0,
+          current: -1,
           previous: -1,
           label: this.labels.days,
           elementId: 'flip-card-days'
         },
         {
-          current: 0,
+          current: -1,
           previous: -1,
           label: this.labels.hours,
           elementId: 'flip-card-hours'
         },
         {
-          current: 0,
+          current: -1,
           previous: -1,
           label: this.labels.minutes,
           elementId: 'flip-card-minutes'
         },
         {
-          current: 0,
+          current: -1,
           previous: -1,
           label: this.labels.seconds,
           elementId: 'flip-card-seconds'
@@ -130,7 +130,7 @@ export default {
         this.updateTime(2, this.minutes)
         this.updateTime(3, this.seconds)
       }
-      if (this.timeData[0].previous !== -1) {
+      if (this.timeData[0].previous !== -1 && this.timeData[0].current !== -1) {
         this.show = true
       } else this.show = false
     }
