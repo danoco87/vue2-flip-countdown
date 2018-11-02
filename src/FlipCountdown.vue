@@ -104,14 +104,14 @@ export default {
   },
   mounted () {
     this.diff = this.date - this.now
-    timeData[0].current = this.days
-    timeData[0].previous = this.days + 1
-    timeData[1].current = this.hours
-    timeData[1].previous = this.hours + 1
-    timeData[2].current = this.minutes
-    timeData[2].previous = this.minutes + 1
-    timeData[3].current = this.seconds
-    timeData[3].previous = this.seconds + 1
+    this.timeData[0].current = this.days
+    this.timeData[0].previous = this.days + 1
+    this.timeData[1].current = this.hours
+    this.timeData[1].previous = this.hours + 1
+    this.timeData[2].current = this.minutes
+    this.timeData[2].previous = this.minutes + 1
+    this.timeData[3].current = this.seconds
+    this.timeData[3].previous = this.seconds + 1
   },
   computed: {
     seconds () {
