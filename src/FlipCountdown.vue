@@ -1,8 +1,25 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @danoco87 Sign out
+2
+21 10 philipjkim/vue2-flip-countdown
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
+vue2-flip-countdown/src/FlipCountdown.vue
+115d691  6 days ago
+ nidkil Add option to set custom labels so that it is possible to translate l…
+     
+315 lines (288 sloc)  6.4 KB
 <template>
     <div class="container flip-clock">
         <template v-for="data in timeData" v-show="show">
             <span v-bind:key="data.label" class="flip-clock__piece" :id="data.elementId">
-                <span class="flip-clock__card flip-card" v-if="timeData[0].previous !== -1">
+                <span class="flip-clock__card flip-card">
                 <b class="flip-card__top">{{data.current | twoDigits}}</b>
                 <b class="flip-card__bottom" v-bind:data-value="data.current | twoDigits"></b>
                 <b class="flip-card__back" v-bind:data-value="data.previous | twoDigits"></b>
@@ -16,7 +33,6 @@
 
 <script>
 let interval = null
-
 export default {
   name: 'flipCountdown',
   props: {
@@ -25,6 +41,18 @@ export default {
     },
     stop: {
       type: Boolean
+    },
+    labels: {
+      type: Object,
+      required: false,
+      default: function () {
+        return {
+          days: 'Days',
+          hours: 'Hours',
+          minutes: 'Minutes',
+          seconds: 'Seconds'
+        }
+      }
     }
   },
   data () {
@@ -35,27 +63,27 @@ export default {
       show: false,
       timeData: [
         {
-          current: -1,
-          previous: -1,
-          label: 'Days',
+          current: 0,
+          previous: 0,
+          label: this.labels.days,
           elementId: 'flip-card-days'
         },
         {
-          current: -1,
-          previous: -1,
-          label: 'Hours',
+          current: 0,
+          previous: 0,
+          label: this.labels.hours,
           elementId: 'flip-card-hours'
         },
         {
-          current: -1,
-          previous: -1,
-          label: 'Minutes',
+          current: 0,
+          previous: 0,
+          label: this.labels.minutes,
           elementId: 'flip-card-minutes'
         },
         {
-          current: -1,
-          previous: -1,
-          label: 'Seconds',
+          current: 0,
+          previous: 0,
+          label: this.labels.seconds,
           elementId: 'flip-card-seconds'
         }
       ]
@@ -120,18 +148,14 @@ export default {
       if (idx >= this.timeData.length || newValue === undefined) {
         return
       }
-
       if (window['requestAnimationFrame']) {
         this.frame = requestAnimationFrame(this.updateTime.bind(this))
       }
-
       const d = this.timeData[idx]
       const val = (newValue < 0 ? 0 : newValue)
-
       if (val !== d.current) {
         d.previous = d.current
         d.current = val
-
         const el = document.querySelector(`#${d.elementId}`)
         if (el) {
           el.classList.remove('flip')
@@ -157,31 +181,24 @@ export default {
   text-align: center;
   perspective: 600px;
   margin: 0 auto;
-
   *,
   *:before,
   *:after { box-sizing: border-box; }
 }
-
-
 .flip-clock__piece {
   display: inline-block;
   margin: 0 0.2vw;
-  
   @media (min-width: 1000px) {
     margin: 0 5px;
   }
 }
-
 .flip-clock__slot {
   font-size: 1rem;
   line-height: 1.5;
   display: block;
 }
-
 @halfHeight: 0.72em;
 @borderRadius: 0.15em;
-
 .flip-card {
   display: block;
   position: relative;
@@ -189,12 +206,10 @@ export default {
   font-size: 2.25rem;
   line-height: 0.95;
 }
-
 @media (min-width: 1000px) {
   .flip-clock__slot { font-size: 1.2rem; }
   .flip-card { font-size: 3rem; }
 }
-
 .flip-card__top,
 .flip-card__bottom,
 .flip-card__back-bottom,
@@ -202,7 +217,7 @@ export default {
 .flip-card__back::after {
   display: block;
   height: @halfHeight;
-  color: deeppink;
+  color: #cca900;
   background: #222;
   padding: 0.23em 0.15em 0.4em;
   border-radius: @borderRadius @borderRadius 0 0;
@@ -212,10 +227,9 @@ export default {
   width: 2.1em;
   height: @halfHeight;
 }
-
 .flip-card__bottom,
 .flip-card__back-bottom {
-  color: deeppink;
+  color: #ffdc00;
   position: absolute;
   top: 50%;
   left: 0;
@@ -226,23 +240,19 @@ export default {
   overflow: hidden;
   z-index: 2;
 }
-
 .flip-card__back-bottom {
   z-index: 1;
 }
-
 .flip-card__bottom::after,
 .flip-card__back-bottom::after {
   display: block;
   margin-top: -@halfHeight;
 }
-
 .flip-card__back::before,
 .flip-card__bottom::after,
 .flip-card__back-bottom::after {
   content: attr(data-value);
 }
-
 .flip-card__back {
   position: absolute;
   top: 0;
@@ -250,26 +260,22 @@ export default {
   left: 0%;
   pointer-events: none;
 }
-
 .flip-card__back::before {
   position: relative;
   overflow: hidden;
   z-index: -1;
 }
-
 .flip .flip-card__back::before {
   z-index: 1;
   animation: flipTop 0.3s cubic-bezier(.37,.01,.94,.35);
   animation-fill-mode: both;
   transform-origin: center bottom;
 }
-
 .flip .flip-card__bottom {
   transform-origin: center top;
   animation-fill-mode: both;
   animation: flipBottom 0.6s cubic-bezier(.15,.45,.28,1);
 }
-
 @keyframes flipTop {
   0% {
     transform: rotateX(0deg);
@@ -283,7 +289,6 @@ export default {
     opacity: 0;
   }
 }
-
 @keyframes flipBottom {
   0%, 50% {
     z-index: -1;
@@ -300,3 +305,16 @@ export default {
   }
 }
 </style>
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Press h to open a hovercard with more details.
