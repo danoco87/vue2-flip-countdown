@@ -25,18 +25,6 @@ export default {
     },
     stop: {
       type: Boolean
-    },
-    labels: {
-      type: Object,
-      required: false,
-      default: function () {
-        return {
-          days: 'Days',
-          hours: 'Hours',
-          minutes: 'Minutes',
-          seconds: 'Seconds'
-        }
-      }
     }
   },
   data () {
@@ -47,27 +35,27 @@ export default {
       show: false,
       timeData: [
         {
-          current: 0,
-          previous: 0,
-          label: this.labels.days,
+          current: 2,
+          previous: 2,
+          label: 'Days',
           elementId: 'flip-card-days'
         },
         {
-          current: 0,
-          previous: 0,
-          label: this.labels.hours,
+          current: 2,
+          previous: 2,
+          label: 'Hours',
           elementId: 'flip-card-hours'
         },
         {
-          current: 0,
-          previous: 0,
-          label: this.labels.minutes,
+          current: 2,
+          previous: 2,
+          label: 'Minutes',
           elementId: 'flip-card-minutes'
         },
         {
-          current: 0,
-          previous: 0,
-          label: this.labels.seconds,
+          current: 2,
+          previous: 2,
+          label: 'Seconds',
           elementId: 'flip-card-seconds'
         }
       ]
@@ -179,7 +167,7 @@ export default {
 .flip-clock__piece {
   display: inline-block;
   margin: 0 0.2vw;
-
+  
   @media (min-width: 1000px) {
     margin: 0 5px;
   }
@@ -214,7 +202,7 @@ export default {
 .flip-card__back::after {
   display: block;
   height: @halfHeight;
-  color: #cca900;
+  color: deeppink;
   background: #222;
   padding: 0.23em 0.15em 0.4em;
   border-radius: @borderRadius @borderRadius 0 0;
@@ -227,7 +215,7 @@ export default {
 
 .flip-card__bottom,
 .flip-card__back-bottom {
-  color: #ffdc00;
+  color: deeppink;
   position: absolute;
   top: 50%;
   left: 0;
