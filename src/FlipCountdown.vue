@@ -64,25 +64,25 @@ export default {
       timeData: [
         {
           current: 0,
-          previous: 0,
+          previous: -1,
           label: this.labels.days,
           elementId: 'flip-card-days'
         },
         {
           current: 0,
-          previous: 0,
+          previous: -1,
           label: this.labels.hours,
           elementId: 'flip-card-hours'
         },
         {
           current: 0,
-          previous: 0,
+          previous: -1,
           label: this.labels.minutes,
           elementId: 'flip-card-minutes'
         },
         {
           current: 0,
-          previous: 0,
+          previous: -1,
           label: this.labels.seconds,
           elementId: 'flip-card-seconds'
         }
@@ -103,9 +103,6 @@ export default {
     }, 1000)
   },
   mounted () {
-    if (this.diff !== 0) {
-      this.show = true
-    }
   },
   computed: {
     seconds () {
@@ -133,6 +130,9 @@ export default {
         this.updateTime(2, this.minutes)
         this.updateTime(3, this.seconds)
       }
+      if (this.timeData[0].previous !== -1) {
+        this.show = true
+      } else this.show = false
     }
   },
   filters: {
@@ -217,7 +217,7 @@ export default {
 .flip-card__back::after {
   display: block;
   height: @halfHeight;
-  color: #cca900;
+  color: deeppink;
   background: #222;
   padding: 0.23em 0.15em 0.4em;
   border-radius: @borderRadius @borderRadius 0 0;
@@ -229,7 +229,7 @@ export default {
 }
 .flip-card__bottom,
 .flip-card__back-bottom {
-  color: #ffdc00;
+  color: deeppink;
   position: absolute;
   top: 50%;
   left: 0;
