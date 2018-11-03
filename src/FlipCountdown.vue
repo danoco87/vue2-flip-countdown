@@ -1,20 +1,3 @@
-Skip to content
- 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- @danoco87 Sign out
-2
-21 10 philipjkim/vue2-flip-countdown
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights
-vue2-flip-countdown/src/FlipCountdown.vue
-115d691  6 days ago
- nidkil Add option to set custom labels so that it is possible to translate l…
-     
-315 lines (288 sloc)  6.4 KB
 <template>
     <div class="container flip-clock">
         <template v-for="data in timeData" v-show="show">
